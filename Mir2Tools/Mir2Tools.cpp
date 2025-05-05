@@ -4,8 +4,16 @@
 #include "framework.h"
 #include "Mir2Tools.h"
 #include <sol\sol.hpp>
-
+#pragma comment(lib, "..\\lib\\liblua.lib")
+#pragma comment(lib, "xcgui.lib")
+#include "xcgui.h"
 #define MAX_LOADSTRING 100
+
+#ifdef _DEBUG
+#pragma message("Release mode")  
+#else  
+#pragma message("Debug mode")  
+#endif
 
 // 全局变量:
 HINSTANCE hInst;                                // 当前实例

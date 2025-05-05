@@ -27,6 +27,9 @@
     <ClInclude Include="Mir2Tools.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="xcgui.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Mir2Tools.cpp">
@@ -45,5 +48,8 @@
     <Image Include="Mir2Tools.ico">
       <Filter>资源文件</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>
