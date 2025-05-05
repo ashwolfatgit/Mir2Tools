@@ -3,6 +3,7 @@
 
 #include "framework.h"
 #include "Mir2Tools.h"
+#include <sol\sol.hpp>
 
 #define MAX_LOADSTRING 100
 
@@ -17,6 +18,12 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
+int add(int a, int b) {
+    return a + b;
+}
+void showmsg(const std::string& title, const std::string& msg) {
+	MessageBoxA(nullptr, msg.c_str(), title.c_str(), MB_OK);
+}
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPWSTR    lpCmdLine,
@@ -26,6 +33,17 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 在此处放置代码。
+    sol::state lua;
+    lua.open_libraries(sol::lib::base);
+
+    // 注册 C++ 函数到 Lua
+    lua.set_function("加法", &add);
+    lua.set_function("消息", &showmsg);
+
+    // 在 Lua 中调用 C++ 函数
+    lua.script("result = 加法(10, 20)");
+    lua.script("消息('加法','10+20='..result)");
+
 
     // 初始化全局字符串
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
